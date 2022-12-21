@@ -2,7 +2,8 @@
 layout: post
 title: "HTB: SHIBBOLETH"
 description: "HTB SHIBBOLETH (10.10.11.124) MACHINE WRITE UP Shibboleth is a medium machine from HackTheBox created by knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL."
-tag: [hackthebox, htb, boot2root, writeup, write-up, linux, snmp, zabbix, command execution, access control lists, shibboleth]
+tags: [hackthebox, htb, boot2root, writeup, write-up, linux, snmp, zabbix, command execution, access control lists, shibboleth]
+image: "/assets/img/shibboleth/shibboleth_feature.png"
 ---
 HTB SHIBBOLETH (10.10.11.124) MACHINE WRITE UP
 Shibboleth is a medium machine from HackTheBox created by  knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL.
@@ -132,8 +133,7 @@ I will add all three to the hosts file and visit the pages.
 
 All three `subdomains` redirect to the same login page
 
-![zabbix login page](/_posts/screenshots/shibboleth/zabbix_login_page.png)
-/home/george/Desktop/github.io/georgewere.github.io/_posts/assets/img/shibboleth/zabbixloginpage.png
+![zabbix login page](/assets/screenshots/shibboleth/zabbix_login_page.png)
 
 What is Zabbix you ask :)?
 
