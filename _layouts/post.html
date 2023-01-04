@@ -19,7 +19,14 @@ layout: default
         <div class="col-sm-3">
           <div class="sticky-top">
               <p>
-                <a href="#" style="color: #e6e6e6; text-decoration: none;">{{ page.title }}</a>
+                <!-- <a href="#" style="color: #e6e6e6; text-decoration: none;">{{ page.title }}</a> -->
+                {% for item in items %}
+      {% if item.name == "h4" or item.name == "h5" or item.name == "h6" %}
+        <a href="#{{ item.id }}" data-toc-skip style="color: #e6e6e6; text-decoration: none;">{{ item.title }}</a>
+      {% else %}
+        <a href="#{{ item.id }}" style="color: #e6e6e6; text-decoration: none;">{{ item.title }}</a>
+      {% endif %}
+    {% endfor %}
               </p>
             <nav id="toc" data-toggle="toc"></nav>
           </div>
@@ -27,10 +34,15 @@ layout: default
   <div class="col-sm-9" id="postBody">
   <div class="post-content e-content" itemprop="articleBody">
     <picture>
-    <source type="image/png" srcset="/assets/img/shibboleth/shibboleth_feature.png">
-    <img src="/assets/img/shibboleth/shibboleth_feature.png" alt="Outdated" style="float: right; margin-right:50px; margin-left:50px; height:120px;" class="include_image ">
-</picture>
-
+      {%- if page.image -%}
+        <source type="image/png" srcset="{{ page.image }}">
+        <img src="{{ page.image }}" alt="Outdated" style="float: right; margin-right:50px; margin-left:50px; height:120px;" class="include_image ">
+      {%- endif -%}
+    </picture>
+      <p>{{ page.description | escape }}</p>
+      {%- if site.show_excerpts -%}
+        {{ page.excerpt }}
+      {%- endif -%}
     {{ content }}
   </div>
 

@@ -1,18 +1,12 @@
 ---
 layout: post
-title: "HTB: SHIBBOLETH"
-description: "HTB SHIBBOLETH (10.10.11.124) MACHINE WRITE UP Shibboleth is a medium machine from HackTheBox created by knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL."
+title: "HTB: SHIBBOLETH (10.10.11.124)"
+description: "Shibboleth is a medium machine from HackTheBox created by knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL."
 tags: [hackthebox, htb, boot2root, writeup, write-up, linux, snmp, zabbix, command execution, access control lists, shibboleth]
 image: "/assets/img/shibboleth/shibboleth_feature.png"
 ---
-HTB SHIBBOLETH (10.10.11.124) MACHINE WRITE UP
-Shibboleth is a medium machine from HackTheBox created by  knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL.
-main
-
-
-
 ## RECON
-### Nmap
+## Nmap
 
 As always we start off with the recon and enumeration process to get an overview of our attack surface and target's running service.
 
@@ -54,18 +48,18 @@ Service detection performed. Please report any incorrect results at https://nmap
 Based on the Apache/2.4.41 version, the host is likely running Ubuntu Focal (20.04LTS).
 ```
 ### Website - TCP 80
-### Site
+#### Site
 
 Manually browsing to shibboleth.htb we see what seems like a default bootstrap website template.
 
 
-## Tech Stack
+#### Tech Stack
 The response headers don’t give much info at all.
 
 But the footer provides some interesting information that we need to take note of
 
 
-## Directory Brute Force
+#### Directory Brute Force
 
 Trying directory Bruteforce using gobuster we get two directories.
 ```bash
@@ -133,15 +127,15 @@ I will add all three to the hosts file and visit the pages.
 
 All three `subdomains` redirect to the same login page
 
-![zabbix login page](/assets/screenshots/shibboleth/zabbix_login_page.png)
+![zabbix login page](/assets/img/shibboleth/zabbix_login_page.png)
 
-What is Zabbix you ask :)?
+### What is Zabbix you ask :)?
 
 Zabbix is an open-source, real-time monitoring tool for servers, networks and virtual machines and cloud services, which can be configured by using XML based templates.
 
 I tested all the default password and weak credentials but none worked.
 
-UDP Port 623
+### UDP Port 623
 A little research reminded me I never checked for any UDP ports open. Lets do just that.
 
 Bingo! port 623 is open.

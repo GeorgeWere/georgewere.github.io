@@ -3,8 +3,6 @@ layout: post
 title:  "Welcome to Jekyll!"
 date:   2022-12-14 20:49:59 +0300
 tags: jekyll update
-description: "HTB SHIBBOLETH (10.10.11.124) MACHINE WRITE UP Shibboleth is a medium machine from HackTheBox created by knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL."
-image: "/assets/img/shibboleth/shibboleth_feature.png"
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 

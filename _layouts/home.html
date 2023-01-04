@@ -35,8 +35,6 @@ layout: default
             <source type="image/png" srcset="{{ post.image }}">
             <img src="{{ post.image }}" alt="Outdated" style="float: right; margin-right:50px; margin-left:50px; height:120px;" class="include_image ">
           {%- endif -%}
-        <!-- <source type="image/png" srcset="/assets/img/shibboleth/shibboleth_feature.png">
-        <img src="/assets/img/shibboleth/shibboleth_feature.png" alt="Outdated" style="float: right; margin-right:50px; margin-left:50px; height:120px;" class="include_image "> -->
       </picture>
         <p>{{ post.description | escape }}</p>
         {%- if site.show_excerpts -%}
