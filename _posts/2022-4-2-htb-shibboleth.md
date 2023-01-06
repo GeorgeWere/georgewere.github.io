@@ -2,7 +2,7 @@
 layout: post
 title: "HTB: SHIBBOLETH (10.10.11.124)"
 description: "Shibboleth is a medium machine from HackTheBox created by knightmare & mrb3n. It starts off with a static website template. We will find a clue to look into BMC automation then find IPMI listening on UDP port 632. I will use Metasploit to leak a hash from IPMI, and crack it to get creds. This creds will allow me to log into Zabbix instance. Once in Zabbix i will use the Zabbix agent to execute commands and gain initial foothold. I will use credential reuse to pivots the next user. To get root, I’ll exploit a CVE in MariaDB / MySQL."
-tags: [hackthebox, htb, boot2root, writeup, write-up, linux, snmp, zabbix, command execution, access control lists, shibboleth]
+tags: [hackthebox, htb, boot2root, writeup, write-up, linux, snmp, zabbix, command execution, access control lists, shibboleth, nmap, gobuster, bloodhoud,]
 image: "/assets/img/shibboleth/shibboleth_feature.png"
 ---
 ## RECON

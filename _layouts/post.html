@@ -6,6 +6,16 @@ layout: default
   <header class="post-header">
     <h1 data-toc-skip class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
+      <span class="tag-list">
+      {%- if page.tags -%}
+        • Tags:
+        {%- for tag in page.tags -%}
+        <a href="/tags/{{ tag | slugify }}" class="post-tag">
+          {{ tag }}
+        {%- endfor -%}
+      {%- endif -%}
+        </a>
+        </span><br><br>
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}
@@ -19,14 +29,7 @@ layout: default
         <div class="col-sm-3">
           <div class="sticky-top">
               <p>
-                <!-- <a href="#" style="color: #e6e6e6; text-decoration: none;">{{ page.title }}</a> -->
-                {% for item in items %}
-      {% if item.name == "h4" or item.name == "h5" or item.name == "h6" %}
-        <a href="#{{ item.id }}" data-toc-skip style="color: #e6e6e6; text-decoration: none;">{{ item.title }}</a>
-      {% else %}
-        <a href="#{{ item.id }}" style="color: #e6e6e6; text-decoration: none;">{{ item.title }}</a>
-      {% endif %}
-    {% endfor %}
+                <a href="#" style="color: #e6e6e6; text-decoration: none;">{{ page.title }}</a>
               </p>
             <nav id="toc" data-toggle="toc"></nav>
           </div>
