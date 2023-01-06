@@ -171,6 +171,8 @@ Our administrator really loves pumpkin pie 😎😎
 
 Now we have a valid username:password, we can try log in to Zabbix
 
+<!-- {% include trunc_image.html src="/assets/img/shibboleth/tryusing the credentials.png" alt="/assets/img/shibboleth/tryusing the credentials.png" ext="png" trunc=400 %} -->
+
 ![try using the credentials](/assets/img/shibboleth/tryusing the credentials.png)
 
 We get redirected to Zabbix dashboard, sweet!

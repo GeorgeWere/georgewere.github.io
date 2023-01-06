@@ -1,0 +1,5 @@
+{% capture img_url %}{{ site.baseurl }}{{ src }}{% endcapture %}
+{% capture img_title %}{{ src | split: '/' | last | split: '.' | first }}{% endcapture %}
+{% capture img_ext %}{{ src | split: '/' | last | split: '.' | last }}{% endcapture %}
+
+<p><a href="{{ img_url }}.{{ img_ext }}"><img src="{{ img_url }}.{{ img_ext }}" alt="{{ img_title }}" height="{{ trunc }}" width="{{ trunc }}" /><br/><em>Click for full size image</em></a></p>
