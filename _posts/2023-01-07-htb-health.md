@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "HTB: SHIBBOLETH (10.10.11.124)"
+title: "HTB: HEALTH (10.10.11.176)"
 description: ""
 tags: []
-image: "/assets/img/shibboleth/shibboleth_feature.png"
+image: "/assets/img/health/health_feature.png"
 ---
 ## RECON
 ### Nmap
