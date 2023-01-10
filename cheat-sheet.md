@@ -3,7 +3,15 @@ layout: page
 title: Cheat Sheet
 permalink: /cheat-sheet/
 ---
-
+<div class="col-sm-3">
+          <div class="sticky-top">
+              <p>
+                <a href="#" style="color: #e6e6e6; text-decoration: none;">{{ page.title }}</a>
+              </p>
+            <nav id="toc" data-toggle="toc"></nav>
+          </div>
+        </div>
+        
 Welcome to my various hacking techniques cheat sheet. This page contains a list of various techniques used in hacking and penetration testing.
 
 Please note that the techniques listed on this page are for educational and ethical purposes only. Misuse of any information provided here is strictly prohibited.
