@@ -45,7 +45,7 @@ the reason we dont include a username is because if you dont put a username it a
 
 - We could use it for `ldapsearch` as below:
 
-```console
+```sh
 ldapsearch -h support.htb -D 'ldap@support.htb' -w 'password' -b 'dc=support,dc=htb' > ldap.out
 
 ```
