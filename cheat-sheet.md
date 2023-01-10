@@ -12,6 +12,34 @@ The techniques are organized by category, such as network hacking, web applicati
 To get started, click on one of the links on the left `toc` to navigate to the relevant category:
 
 ## INITIAL RECON
+### Enumerate smb
+we can run `cme` to get some type of a burner
+
+```console
+cme smb 'ip'
+```
+try listing shares
+
+```console
+cme smb 'ip' --shares
+```
+We can try `null` authentication
+
+```console
+cme smb 'ip' --shares -u '' -p ''
+```
+if that fails we can try anonymous authentication by putting anything on the username which if it does not exist falls back to `anonymous`
+
+```console
+cme smb 'ip' --shares -u 'DoesNotExist' -p ''
+```
+If you get a shared folder you can connect to it via smbclient
+
+```console
+smbclient -N //10.10.11.174/$share
+```
+The reason we dont include a username is because if you dont put a username it attempts to authenticate with the current username of your box
+
 ## PORT ENUMERATION
 ## EXPLOITATION
 ## PRIVILEGE ESCALATION
