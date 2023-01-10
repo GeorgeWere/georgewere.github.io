@@ -13,7 +13,8 @@ To get started, click on one of the links on the left `toc` to navigate to the r
 
 ## INITIAL RECON
 ### Enumerate smb
-we can run `cme` to get some type of a burner
+
+run `cme` to get some type of a burner
 
 ```console
 cme smb 'ip'
