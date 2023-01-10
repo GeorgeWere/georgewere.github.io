@@ -13,8 +13,7 @@ To get started, click on one of the links on the left `toc` to navigate to the r
 
 ## INITIAL RECON
 ### Enumerate smb
-
-run `cme` to get some type of a burner
+Run `cme` to get some type of a burner
 
 ```console
 cme smb 'ip'
@@ -24,7 +23,7 @@ try listing shares
 ```console
 cme smb 'ip' --shares
 ```
-We can try `null` authentication
+Trying `null` authentication
 
 ```console
 cme smb 'ip' --shares -u '' -p ''
@@ -39,9 +38,20 @@ If you get a shared folder you can connect to it via smbclient
 ```console
 smbclient -N //10.10.11.174/$share
 ```
-The reason we dont include a username is because if you dont put a username it attempts to authenticate with the current username of your box
 
-## PORT ENUMERATION
-## EXPLOITATION
-## PRIVILEGE ESCALATION
+the reason we dont include a username is because if you dont put a username it attempts to authenticate with the current username of your box
 
+## If we have a credential
+
+- We could use it for `ldapsearch` as below:
+
+```console
+ldapsearch -h support.htb -D 'ldap@support.htb' -w 'password' -b 'dc=support,dc=htb' > ldap.out
+
+```
+From the above example
+
+`-h for hostname`
+`-D bind distinguish name`
+`-w for password`
+`-b for root domain` - this is just how ldap refers to it ( the actual domain is support.htb)
