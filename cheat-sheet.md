@@ -50,8 +50,9 @@ ldapsearch -h support.htb -D 'ldap@support.htb' -w 'password' -b 'dc=support,dc=
 
 ```
 From the above example
-
+---
 `-h for hostname`
 `-D bind distinguish name`
 `-w for password`
 `-b for root domain` - this is just how ldap refers to it ( the actual domain is support.htb)
+---
