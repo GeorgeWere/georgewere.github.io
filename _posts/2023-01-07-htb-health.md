@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTB: HEALTH (10.10.11.176)"
-description: ""
+description: "For the user flag, you will need to abuse the SQL Injection via redirect exploit and use SSRF attack to exploit on Gogs which leaks the user table. As for the root flag, you need to exploit a cron job by generating a tasks directly to the database where also can bypassing the filtering the website"
 tags: []
 image: "/assets/img/health/health_feature.png"
 ---

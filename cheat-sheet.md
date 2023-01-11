@@ -41,7 +41,7 @@ smbclient -N //10.10.11.174/$share
 
 the reason we dont include a username is because if you dont put a username it attempts to authenticate with the current username of your box
 
-## If we have a credential
+### If we have a credential
 
 - We could use it for `ldapsearch` as below:
 
