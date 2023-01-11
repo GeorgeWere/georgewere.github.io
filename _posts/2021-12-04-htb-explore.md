@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTB: EXPLORE (10.10.10.247)"
-description: "Explore was an easy Android box that needed a little more enumeration to discover more ports. First I will check out the services running on the ports and discover ESFileExplorer which is vulnerable to CVE-2019-6447. This will allow me to read, list and get files. I will find a an image with credentials to the ssh service. Once logged in via SSH I will check for listening services and discover a hidden service listening on port  5555. I will forward this port to my box and use ADB to connect and gain root shell on the box."
+description: "Explore is an easy Android box, the first of its kind on HTB. First I will check out the services running on the ports and discover ESFileExplorer which is vulnerable to CVE-2019-6447. This will allow me to read, list and get files. I will find a an image with credentials to the ssh service. Once logged in via SSH I will check for listening services and discover a hidden service listening on port  5555. I will forward this port to my box and use ADB to connect and gain root shell on the box."
 tags: [ctf, hackthebox, android, adb, debug-port, es-file-explorer, CVE-2019-6447, '5555', explore, nmap, port-forwad]
 image: "/assets/img/explore/Explore.png"
 ---
