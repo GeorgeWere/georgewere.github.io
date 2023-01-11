@@ -50,3 +50,28 @@ while True:
         log.write(f"{time.ctime()} - Refresh Success: {success} - Duration: {duration}s\n")
     time.sleep(3600) # refresh the webpage every 1 hour (3600 seconds)
     ```
+```py
+import requests
+import time
+
+url = "" 
+log_file = "refresh_log.txt"
+headers = {'User-Agent': 'myuseragent'}
+
+while True:
+    start_time = time.time()
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            print(f'{url} has been refreshed!')
+            success = True
+        else:
+            success = False
+    except:
+        success = False
+    end_time = time.time()
+    duration = end_time - start_time
+    with open(log_file, "a") as log:
+        log.write(f"{time.ctime()} - Refresh Success: {success} - Duration: {duration}s\n")
+    time.sleep(3600)
+```

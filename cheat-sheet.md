@@ -56,3 +56,4 @@ From the above example
  -w for password
  -b for root domain - this is just how ldap refers to it ( the actual domain is support.htb)
  ```
+Check for attribute fields like `info` or  `description`
