@@ -22,3 +22,31 @@ PWNED! :D
 I hope I have been as clear as possible, without giving too many hints....
 
 Sorry for the long reply... but it's almost a full writeup xD
+
+
+```py
+how to add user agent on below script
+
+import requests
+import time
+
+url = "http://www.example.com" # Replace with the URL of the webpage you want to refresh
+log_file = "refresh_log.txt" # Replace with the file name you want to save the log to
+
+while True:
+    start_time = time.time()
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            print(f'{url} has been refreshed!')
+            success = True
+        else:
+            success = False
+    except:
+        success = False
+    end_time = time.time()
+    duration = end_time - start_time
+    with open(log_file, "a") as log:
+        log.write(f"{time.ctime()} - Refresh Success: {success} - Duration: {duration}s\n")
+    time.sleep(3600) # refresh the webpage every 1 hour (3600 seconds)
+    ```
