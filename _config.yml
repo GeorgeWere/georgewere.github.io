@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: The Byte-tastic: CTF Fortress
+title: "The Byte-tastic: CTF Fortress"
 # emphasizing the focus on CTFs while keeping the theme of cybersecurity.
 email: weregeog@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
