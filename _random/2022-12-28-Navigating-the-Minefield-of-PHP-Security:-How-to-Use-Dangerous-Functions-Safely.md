@@ -8,11 +8,11 @@ image: "/assets/img/php/php_feature.png"
 Here are a few examples:
 ## eval()
 
-This function takes a string as an argument and evaluates it as PHP code. This can be very dangerous if an attacker is able to inject arbitrary code into the string.
+This function takes a string as an argument and evaluates it as `PHP` code. This can be very dangerous if an attacker is able to inject arbitrary code into the string.
 
 ### How to Sanitize eval()
 
-Instead of using eval(), you can use create_function() to dynamically create a function and call it. This allows you to pass user input to a function without the risk of arbitrary code execution.
+Instead of using `eval()`, you can use `create_function()` to dynamically create a function and call it. This allows you to pass user input to a function without the risk of arbitrary code execution.
 
 ### Practical example
 #### Dangerous use:
@@ -21,7 +21,7 @@ $userInput = $_GET['user_input'];
 eval($userInput);
 
 ```
-This code takes user input from the `GET` variable "user_input" and passes it directly to the eval() function. If an attacker is able to inject malicious code into the "user_input" variable, it could potentially be executed on the server.
+This code takes user input from the `GET` variable `"user_input"` and passes it directly to the `eval()` function. If an attacker is able to inject malicious code into the `"user_input"` variable, it could potentially be executed on the server.
 
 #### Safe use:
 ```php
@@ -45,7 +45,7 @@ only use known and specific commands, and validate and sanitize any user input p
 $userInput = $_GET['command'];
 $handle = popen($userInput, 'r');
 ```
-This code takes user input from the GET variable "command" and passes it directly to the popen() function, which can potentially be used to execute arbitrary code if an attacker is able to inject malicious data into the command string.
+This code takes user input from the GET variable `"command"` and passes it directly to the `popen()` function, which can potentially be used to execute arbitrary code if an attacker is able to inject malicious data into the command string.
 
 #### safe use of popen()
 ```php
@@ -53,7 +53,7 @@ $userInput = $_GET['command'];
 $command = escapeshellcmd($userInput);
 $handle = popen($command, 'r');
 ```
-This code uses the escapeshellcmd() function to sanitize the user input by escaping any special characters, ensuring that only safe commands can be executed.
+This code uses the `escapeshellcmd()` function to sanitize the user input by escaping any special characters, ensuring that only safe commands can be executed.
 
 #### Dangerous use of proc_open()
 
@@ -62,7 +62,7 @@ $userInput = $_GET['command'];
 $descriptorspec = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
 $process = proc_open($userInput, $descriptorspec, $pipes);
 ```
-This code takes user input from the GET variable "command" and passes it directly to the proc_open() function, which can potentially be used to execute arbitrary code if an attacker is able to inject malicious data into the command string.
+This code takes user input from the GET variable `"command"` and passes it directly to the `proc_open()` function, which can potentially be used to execute arbitrary code if an attacker is able to inject malicious data into the command string.
 
 #### safe use of proc_open()
 
@@ -72,7 +72,7 @@ $command = escapeshellcmd($userInput);
 $descriptorspec = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
 $process = proc_open($command, $descriptorspec, $pipes);
 ```
-This code uses the escapeshellcmd() function to sanitize the user input by escaping any special characters, this way you can ensure that only safe commands can be executed via proc_open() function. It's always important to validate and sanitize any user input that is used in these types of functions to prevent potential security vulnerabilities.
+This code uses the `escapeshellcmd()` function to sanitize the user input by escaping any special characters, this way you can ensure that only safe commands can be executed `via proc_open()` function. It's always important to validate and sanitize any user input that is used in these types of functions to prevent potential security vulnerabilities.
 
 ## passthru()
 
