@@ -41,7 +41,29 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 # Nmap done at Fri Feb 10 12:28:51 2023 -- 1 IP address (1 host up) scanned in 26.37 seconds
 ```
+headers
 
+```http
+HTTP/1.1 200 OK
+
+Server: nginx/1.18.0 (Ubuntu)
+
+Date: Sat, 11 Feb 2023 13:09:35 GMT
+
+Content-Type: text/html;charset=utf-8
+
+Connection: close
+
+X-Xss-Protection: 1; mode=block
+
+X-Content-Type-Options: nosniff
+
+X-Frame-Options: SAMEORIGIN
+
+Content-Length: 843
+
+
+```
 ```js
 function init() {
   // Jameson: pre-populate creds for tech support as they keep forgetting them and emailing me
