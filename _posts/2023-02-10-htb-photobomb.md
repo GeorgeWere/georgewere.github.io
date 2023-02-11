@@ -11,3 +11,13 @@ image: "/assets/img/photobomb/photobomb_feature.png"
 As always we start off with the recon and enumeration process to get an overview of our attack surface and target's running service.
 
 We run NMAP with default scripts and enumerate version and save it in the directory called nmap.
+
+```js
+function init() {
+  // Jameson: pre-populate creds for tech support as they keep forgetting them and emailing me
+  if (document.cookie.match(/^(.*;)?\s*isPhotoBombTechSupport\s*=\s*[^;]+(.*)?$/)) {
+    document.getElementsByClassName('creds')[0].setAttribute('href','http://pH0t0:b0Mb!@photobomb.htb/printer');
+  }
+}
+window.onload = init;
+```
