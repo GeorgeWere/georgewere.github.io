@@ -75,3 +75,7 @@ fi
 # protect the priceless originals
 find source_images -type f -name '*.jpg' -exec chown root:root {} \;
 ```
+```sh
+root@photobomb:~# cat root.txt
+6e1520841af265a0b4670439d183a254
+```
