@@ -12,7 +12,7 @@ As always we start off with the recon and enumeration process to get an overview
 
 We run NMAP with default scripts and enumerate version and save it in the directory called nmap.
 
-```nmap
+```sh
 # Nmap 7.92 scan initiated Fri Feb 10 12:27:30 2023 as: nmap -p- --min-rate 10000 -oA nmap/allports 10.10.11.182
 Nmap scan report for 10.10.11.182
 Host is up (0.59s latency).
