@@ -1,0 +1,8 @@
+"The dark side of web development: Understanding and defending against PHP webshells"
+"Hacking made easy: The rise of ASPX webshells and how to protect yourself"
+"JavaScript gone rogue: How to spot and stop a JavaScript webshell attack"
+"Web shells 101: A beginner's guide to understanding and preventing PHP, ASPX, and JavaScript attacks"
+"Don't get shell shocked: A deep dive into the dangers of PHP, ASPX, and JavaScript webshells"
+"Web shells in the wild: Real-world examples of PHP, ASPX, and JavaScript attacks and how to prevent them"
+"From zero to shell: How attackers use PHP, ASPX, and JavaScript webshells to gain access to your servers"
+"Shell shock: A comprehensive guide to identifying and preventing PHP, ASPX, and JavaScript webshell attacks"

