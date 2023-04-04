@@ -1,3 +1,11 @@
+---
+layout: post
+title: "Effortlessly Extract Open Ports from Nmap Scans with This One-Liner Bash Script"
+description: "Speed up your port scanning with this simple one-liner script! In this blog post, we'll show you how to extract all the open ports from an nmap scan and format them into a single line separated by commas. This can save you a lot of time when conducting service or version checks on hosts with multiple open ports. No more manual copying and pasting required!."
+tags: [nmap,bash,shell,awk,grep,sed]
+image: "/assets/img/webshell/webshell.png"
+---
+
 # Effortlessly Extract Open Ports from Nmap Scans with This One-Liner Bash Script
 
 If you're a network or security engineer, you're probably familiar with Nmap, the popular network scanner that can be used for a variety of tasks, including port scanning, host discovery, and service and version detection.
