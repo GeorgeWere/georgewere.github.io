@@ -4,7 +4,18 @@ If you're a network or security engineer, you're probably familiar with Nmap, th
 
 When performing a port scan with Nmap, you typically get a list of open, closed, and filtered ports, along with some additional information about each port, such as the protocol and service name. But what if you want to extract only the open ports from the scan output, so you can perform service and version checks on them? Doing this manually can be time-consuming and error-prone, especially if you're dealing with a large number of open ports.
 
-Luckily, there's a simple one-liner Bash script that can extract all the open ports from your Nmap scan output and present them in one line, separated by commas. Here's the script:
+Luckily, there's a simple one-liner Bash script that can extract all the open ports from your Nmap scan output and present them in one line, separated by commas. 
+
+Say you have below output
+
+And we want to get to below Output
+
+```sh
+sudo nmap -sC -sV -p 53,80,88,135,139,389,445,464,593,636,3268,3269,5985,9389,47001,49664,49665,49666,49667,49673,49674,49675,49679,49685,49704,49708,50480 
+```
+Imagine doing this manually, how many errors are you prone to make. Don't worry, I just made your work easier :)
+
+Here's the script:
 
 ```sh
 cat nmap/allports.nmap | grep '^[0-9]' | awk '{print $1}' | cut -d '/' -f1 | tr '\n' ',' | sed 's/,$//'
@@ -24,6 +35,7 @@ cut -d '/' -f1: This command removes the slash and the protocol (TCP/UDP) that f
 tr '\n' ',': This command replaces all the newline characters (\n) with commas (,). It uses the tr command to perform the substitution.
 
 sed 's/,$//': This command removes the trailing comma at the end of the line. It uses the sed command to perform the substitution: the pattern ,$ matches the comma at the end of the line, and the empty replacement removes it.
+
 
 The final output is a comma-separated list of the open port numbers, which you can easily copy and paste into another command, such as a service or version detection tool.
 
