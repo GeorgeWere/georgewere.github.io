@@ -3,7 +3,7 @@ layout: post
 title: "HTB: BRAINFUCK (10.10.10.17)"
 description: "Brainfuck is an Insane Linux Box from Hack The Box which hosts a wordpress site with a vulnerable plugin which allows for authentication bypass. In root we dont actually get shell on the box but we are able to read the root flag by breaking RSA."
 tags: [Brainfuck, Insane, Wordpress, RSA, htb, boxes, wpscan, python, SMTP, IMAP, POP3, https, subdomain, John, ssh2john, ctf, crypto, nmap, vulnerable-plugin, auth-bypass]
-image: "/assets/img/sbrainfuck/feature.png"
+image: "/assets/img/brainfuck/feature.png"
 ---
 ## RECON
 ### Nmap
