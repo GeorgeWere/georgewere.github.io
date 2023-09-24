@@ -10,7 +10,7 @@ image: "/assets/img/brainfuck/feature.png"
 
 As always we start off with the recon and enumeration process to get an overview of our attack surface and target's running service.
 
-```Shell
+```python
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ sudo nmap -p- --min-rate 10000 -oA nmap/all_ports 10.10.10.17
 [sudo] password for george:
@@ -83,7 +83,7 @@ Also we are able to pick up an email address `orestis@brainfuck.htb`
 
 Since we are sure this is a wordpress site, instead of running directory bruteforce, lets run `wpscan`. The box is quite old hence we are sure to get a tonn of vulnerabilities hence we will ignore anything on the wordpress core
 
-```
+```python
 ┌─[✗]─[george@parrot]─[~/HTB/boxes/brainfuck]                  
 └──╼ $ wpscan --url https://brainfuck.htb --enumerate ap --disable-tls-checks
 _______________________________________________________________
@@ -138,7 +138,7 @@ One name keeps poping up on these sites and that is `orestis`. Must be an import
 
 Connecting to smtp using telnet is a success and we are able to verify user `orestis` but not `admin`
 
-```Sh
+```python
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ telnet 10.10.10.17 25
 Trying 10.10.10.17...
@@ -158,7 +158,7 @@ VRFY orestis
 
 I will check for any vulnerability on the `wp support plus` plugin version from `searchsploit`.
 
-```
+```python
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ searchsploit wp support plus
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
@@ -202,9 +202,7 @@ http://security.szurek.pl/wp-support-plus-responsive-ticket-system-713-privilege
 
 Then you can go to admin panel.
 ```
-Key take alway:
-
-  You can login as anyone without knowing password because of incorrect usage of wp_set_auth_cookie().
+Key take away: You can login as anyone without knowing password because of incorrect usage of `wp_set_auth_cookie()`.
 
 Cool Lets try it out.
 
