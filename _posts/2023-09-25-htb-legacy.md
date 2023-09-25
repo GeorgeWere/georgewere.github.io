@@ -174,7 +174,7 @@ EternalBlue has been famously used to spread WannaCry and Petya ransomware.
 
 #### Exploit
 
-I searched around for an exploit that doesnt use metasploit and cam across a lot given how famous this exploit is. After numerous tests, I found this [repo](git clone https://github.com/c1ph3rm4st3r/MS17-010_CVE-2017-0143.git) to suite my requirements as I am working with Windows XP.
+I searched around for an exploit that doesnt use metasploit and cam across a lot given how famous this exploit is. After numerous tests, I found this [repo](https://github.com/helviojunior/MS17-010.git) to suite my requirements as I am working with Windows XP.
 
 I will use the **Send_and_execute.py** script to upload an executable and run it.
 
@@ -205,9 +205,9 @@ Payload size: 324 bytes
 Final size of exe file: 73802 bytes
 Saved as: george.exe
 ```
-### Shell as NT AUTHORITY\SYSTEM
+## Shell as NT AUTHORITY\SYSTEM
 
-#### Troubleshooting Python2 Impacket
+### Troubleshooting Python2 Impacket
 
 I will Start my listener and execute the Exploit.
 
