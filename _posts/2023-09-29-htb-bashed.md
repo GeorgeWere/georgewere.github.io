@@ -273,6 +273,5 @@ I was curious if its a `cron` that was executing the scripts, so I will list all
 ```
 Sure enough there is a cron job entry which runs all Python (.py) scripts located in the "/scripts" directory every minute of every day. It's a way to automate the execution of these scripts on a regular basis.
 
-
 And thats the box. Thank you all for taking your time to read my blog post, stay tuned for the next!
 Happy hacking!
