@@ -184,10 +184,11 @@ root     Super-User            console      <Oct 14, 2022>
 
 `root` seems to have a physical access to the box
 
-### Shell as Sunny
+## Shell as Sunny
+
 I note the `sunny` user has had access to the box latest today unlike other users. I will take the username and try bruteforcing the password
 
-Firing up `hydra` and using the password list `/opt/Seclists/Passwords/days.txt` since the box is named after a day of the week, i fugured why not.
+Firing up `hydra` and using the password list `/opt/Seclists/Passwords/days.txt` since the box is named after a day of the week, I figured why not.
 
 ```sh
 ┌─[george@parrot]─[~/HTB/boxes/sunday]
