@@ -84,7 +84,7 @@ I am unable to connect to SMB without any credentials.
 session setup failed: NT_STATUS_ACCESS_DENIED
 ┌─[✗]─[george@parrot]─[~/HTB/jeeves]
 ```
-### Port 50000(http)
+#### Port 50000(http)
 
 Visiting this page I get a `404` error with a link to a  `jetty` site which is a java based webserver.
 
