@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTB: JEEVES (10.10.10.63)"
-description: "I will begin by targeting a web server and identifying a Jenkins instance that lacks authentication. This Jenkins vulnerability can be exploited to gain execution privileges and establish a remote shell connection. Once I have access, I will search for a KeePass database, extract a hash, and leverage it to gain administrative privileges. It's worth noting that the root.txt file is hidden within an alternative data stream."
+description: "I will begin by targeting a web server and identifying a Jenkins instance that lacks authentication. This Jenkins misconfiguration can be exploited to gain execution privileges and establish a remote shell connection. Once I have access, I will search for a KeePass database, extract a hash, and leverage it to gain administrative privileges. It's worth noting that the root.txt file is hidden within an alternative data stream."
 tags: [Jenkins, Jeeves, HTB, HackTheBox, Nishang, Script console, Groovey, pass the hash, password spray, crackmapexec, psexec, gobuster, Alternate Data Stream, keepass, keepass2john, hashcat, password cracking]
 image: "/assets/img/jeeves/feature.png"
 ---
