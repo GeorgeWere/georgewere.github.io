@@ -1,3 +1,4 @@
+/* Special thanks to 0xdf for assisting with the customization. twitter @0xdf_*/
 .tag-list:before{content:"\1f3f7";font-size:1.7em;}
 .tag-list {word-spacing:10px; margin:0px; padding:0px;}
 .post-meta {line-height:11px}
