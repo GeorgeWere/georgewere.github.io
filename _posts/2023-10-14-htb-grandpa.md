@@ -169,9 +169,9 @@ SeChangeNotifyPrivilege       Bypass traverse checking                  Enabled
 SeImpersonatePrivilege        Impersonate a client after authentication Enabled
 SeCreateGlobalPrivilege       Create global objects                     Enabled
 ```
-And I note I have `SeImpersonatePrivilege`. Awesome, I will attempt to run a `potato` exploit to privesc.
+In this case I note I have `SeImpersonatePrivilege`. Awesome, I will attempt to run a `potato` exploit to privesc.
 
-[otten potato](https://foxglovesecurity.com/2016/09/26/rotten-potato-privilege-escalation-from-service-accounts-to-system/) will not work since we are not in a metasploit shell hence I am left with `juicy potato`
+[Rotten potato](https://foxglovesecurity.com/2016/09/26/rotten-potato-privilege-escalation-from-service-accounts-to-system/) will not work since we are not in a metasploit shell hence I am left with `juicy potato`
 
 ### Juicy Potato
 
