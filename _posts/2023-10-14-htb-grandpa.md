@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTB: GRANDPA (10.10.10.14)"
-description: "Grandpa is an easy windows box from HackTheBox similar in style to Granny but with a twist. I will find a buffer overflow vulnerability on IIS 6.0 which give me my initial foothold on the box. For privesc I will use juicy potato to exploit the box and get admin privileges"
+description: "Grandpa is an easy windows box from HackTheBox similar in style to Granny but with a twist. I will find a buffer overflow vulnerability on IIS 6.0 which will give me my initial foothold on the box. For privesc I will use juicy potato to exploit the box and get admin privileges"
 tags: [HTB, HackTheBox, Grandpa, buffer overflow, Juicy Potato, Churrasco, WebDAV, davtest, IIS 6.0, SeImpersonatePrivilege, ]
 image: "/assets/img/grandpa/feature.png"
 ---
