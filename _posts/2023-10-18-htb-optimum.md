@@ -121,6 +121,7 @@ print("payload: ", payload)
 print("\nListening for connection...")
 os.system(f'nc -nlvp {lport}')
 ```
+
 This looks like it was created just for this box. Running this will definatly get me a shell, I just need to change the `lhost`. But nope I dont want the easy way out so I will take the `CVE-2014-6287` and try this the manual way.
 
 ## Shell as kostas
