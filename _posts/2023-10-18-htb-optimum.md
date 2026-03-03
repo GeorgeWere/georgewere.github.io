@@ -47,8 +47,8 @@ Visiting the page I see `HttpFileServer 2.3` which is a free web server specific
 
 There are no default credentials hence the I will ignore the login page.
 
+![Page 80](/assets/img/optimum/port80.png)
 
-{% include trunc_image.html src="/assets/img/optimum/port80" trunc="420" %}
 
 I will check `searchsploit` for any exploits on this version. And what do you know, several pop up
 
