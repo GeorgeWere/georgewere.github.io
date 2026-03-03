@@ -410,13 +410,15 @@ pre > code {
 .post-content pre,
 .highlighter-rouge .highlight,
 div.highlight {
-    background: radial-gradient(circle at top left, #0b1120 0, #020617 55%, #020617 100%);
-    border-radius: 0.6rem;
-    padding: 0.85rem 1rem;
-    border: none;
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
+    background: #020617;
+    border-radius: 0.4rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-left-width: 3px;
+    border-left-color: #38bdf8;
+    box-shadow: none;
     overflow-x: auto;
-    margin: 0.8rem 0;
+    margin: 0.75rem 0;
 }
 
 .post-content pre code {
