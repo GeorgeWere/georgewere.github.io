@@ -8,14 +8,13 @@ layout: default
     <p class="post-meta">
       <span class="tag-list">
       {%- if page.tags -%}
-        • Tags:
         {%- for tag in page.tags -%}
         <a href="/tags/{{ tag | slugify }}" class="post-tag">
           {{ tag }}
+        </a>
         {%- endfor -%}
       {%- endif -%}
-        </a>
-        </span><br><br>
+      </span><br><br>
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}

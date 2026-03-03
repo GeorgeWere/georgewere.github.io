@@ -8,17 +8,23 @@
 
     var imgs = post.querySelectorAll("img");
 
-    imgs.forEach(function (img) {
+    imgs.forEach(function (img, index) {
       // Skip if already wrapped or explicitly opted out
       if (
         img.closest(".trunc-image") ||
         img.hasAttribute("data-no-trunc") ||
+        img.classList.contains("include_image") || // front-matter title images
         img.classList.contains("img-av") ||
         img.classList.contains("img-os") ||
         img.classList.contains("float") ||
         img.classList.contains("float-left") ||
         img.classList.contains("left-image")
       ) {
+        return;
+      }
+
+      // Don't auto-truncate the very first inline image in the post
+      if (index === 0) {
         return;
       }
 
