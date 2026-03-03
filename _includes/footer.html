@@ -1,12 +1,14 @@
 <footer class="site-footer h-card">
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
 
-  <div class="wrapper">
+  <div class="wrapper footer-shell">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h2 data-toc-skip class="footer-heading">{{ site.title | escape }}</h2>
+        <p class="footer-tagline">{{- site.description | escape -}}</p>
+      </div>
 
-    <h2 data-toc-skip class="footer-heading">{{ site.title | escape }}</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
+      <div class="footer-meta">
         <ul class="contact-list">
           <li class="p-name">
             {%- if site.author -%}
@@ -14,23 +16,21 @@
             {%- else -%}
               {{ site.title | escape }}
             {%- endif -%}
-            </li>
-            {%- if site.email -%}
-            <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-            {%- endif -%}
+          </li>
+          {%- if site.email -%}
+          <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          {%- endif -%}
         </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
         {%- include social.html -%}
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>{{- site.description | escape -}}</p>
       </div>
     </div>
 
+    <div class="footer-bottom">
+      <span>© {{ "now" | date: "%Y" }} {{ site.author | default: site.title }}</span>
+      <span class="footer-builtby">Built by {{ site.author | default: site.title }}</span>
+    </div>
   </div>
+
   <script src="{{ "/assets/js/jquery-3.6.0.min.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/bootstrap.min.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/bootstrap-toc.min.js" | relative_url }}"></script>
