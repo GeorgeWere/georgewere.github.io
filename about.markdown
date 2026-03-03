@@ -4,15 +4,19 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi, I’m **George Were**.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+This site is my personal playground for offensive security and CTF write‑ups – mostly HackTheBox, lab notes, and the odd deep‑dive when something is interesting enough to pull apart properly.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+I like:
 
+- Breaking things in controlled environments and documenting the path.
+- Turning long terminal sessions into readable posts.
+- Building small tools and tweaks that make day‑to‑day hacking smoother.
 
-[jekyll-organization]: https://github.com/jekyll
+If you want to connect or reach out:
+
+- **LinkedIn**: [linkedin.com/in/george-were](https://www.linkedin.com/in/george-were/)
+- **Email**: [{{ site.email }}](mailto:{{ site.email }})
+
+Everything here is for learning and reference only – don’t use any of it on systems you don’t own or have explicit permission to test.
