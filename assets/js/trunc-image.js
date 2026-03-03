@@ -1,6 +1,59 @@
 // Expand / collapse truncated images
 (function () {
+  var DEFAULT_TRUNC = 420;
+
+  function autoWrapPostImages() {
+    var post = document.querySelector(".post-content");
+    if (!post) return;
+
+    var imgs = post.querySelectorAll("img");
+
+    imgs.forEach(function (img) {
+      // Skip if already wrapped or explicitly opted out
+      if (
+        img.closest(".trunc-image") ||
+        img.hasAttribute("data-no-trunc") ||
+        img.classList.contains("img-av") ||
+        img.classList.contains("img-os") ||
+        img.classList.contains("float") ||
+        img.classList.contains("float-left") ||
+        img.classList.contains("left-image")
+      ) {
+        return;
+      }
+
+      var figure = document.createElement("figure");
+      figure.className = "trunc-image include_image";
+
+      var inner = document.createElement("div");
+      inner.className = "trunc-image__inner";
+      inner.setAttribute("data-max-height", String(DEFAULT_TRUNC));
+
+      var fade = document.createElement("div");
+      fade.className = "trunc-image__fade";
+
+      var caption = document.createElement("figcaption");
+      caption.className = "trunc-image__caption";
+
+      var btn = document.createElement("button");
+      btn.className = "trunc-image__toggle";
+      btn.type = "button";
+      btn.textContent = "Expand full image";
+
+      caption.appendChild(btn);
+      inner.appendChild(img.cloneNode(true));
+      inner.appendChild(fade);
+      figure.appendChild(inner);
+      figure.appendChild(caption);
+
+      img.parentNode.replaceChild(figure, img);
+    });
+  }
+
   function initTruncImages() {
+    // First wrap any plain post images
+    autoWrapPostImages();
+
     var blocks = document.querySelectorAll(".trunc-image");
     if (!blocks.length) return;
 
