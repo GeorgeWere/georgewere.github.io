@@ -2,18 +2,10 @@
 {% capture img_title %}{{ src | split: '/' | last | split: '.' | first }}{% endcapture %}
 {% capture img_ext %}{{ src | split: '/' | last | split: '.' | last }}{% endcapture %}
 
-<figure class="trunc-image include_image">
-  <div class="trunc-image__inner" data-max-height="{{ trunc }}">
-    <img
-      src="{{ img_url }}.{{ img_ext }}"
-      alt="{{ img_title }}"
-      loading="lazy"
-    />
-    <div class="trunc-image__fade"></div>
-  </div>
-  <figcaption class="trunc-image__caption">
-    <button class="trunc-image__toggle" type="button">
-      Expand full image
-    </button>
-  </figcaption>
+<figure class="post-image-card include_image">
+  <img
+    src="{{ img_url }}.{{ img_ext }}"
+    alt="{{ img_title }}"
+    loading="lazy"
+  />
 </figure>

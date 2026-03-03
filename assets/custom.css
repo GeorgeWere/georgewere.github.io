@@ -1,4 +1,8 @@
 /* Special thanks to 0xdf for assisting with the customization. twitter @0xdf_*/
+html {
+    scroll-behavior: smooth;
+}
+
 .tag-list {
     display: inline-flex;
     flex-wrap: wrap;
@@ -42,9 +46,13 @@
 
 img {
     padding: 5px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 0.75rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
 }
 
-.center-image, img {
+.center-image {
     margin: 0 auto;
     display: block;
 }
@@ -342,62 +350,22 @@ div .highlight > pre {
 }
 
 /**********************
- * Truncated images
+ * Image cards
  */
 
-.trunc-image {
+.post-image-card {
     margin: 1.75rem 0;
-    border-radius: 0.75rem;
+    border-radius: 0.9rem;
     overflow: hidden;
     background: radial-gradient(circle at top, #020617 0, #0b1120 55%, #020617 100%);
-    border: 1px solid rgba(148, 163, 184, 0.5);
+    border: 1px solid rgba(148, 163, 184, 0.45);
     box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
 }
 
-.trunc-image__inner {
-    position: relative;
-    max-height: 420px;
-    overflow: hidden;
-    transition: max-height 0.28s ease-in-out;
-}
-
-.trunc-image__inner img {
+.post-image-card img {
     width: 100%;
     height: auto;
     display: block;
-}
-
-.trunc-image__fade {
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 96px;
-    background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0) 0%,
-        rgba(15, 23, 42, 0.8) 40%,
-        rgba(15, 23, 42, 1) 100%
-    );
-    pointer-events: none;
-}
-
-.trunc-image__caption {
-    display: flex;
-    justify-content: center;
-    padding: 0.9rem 1.2rem 1.1rem;
-    background: radial-gradient(circle at top, #020617 0, #0b1120 55%, #020617 100%);
-}
-
-.trunc-image__toggle {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-}
-
-.trunc-image--expanded .trunc-image__inner {
-    max-height: none;
-}
-
-.trunc-image--expanded .trunc-image__fade {
-    opacity: 0;
 }
 
 /**********************
